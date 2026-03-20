@@ -3,7 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CompetitionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Sports;
+use App\Entity\Event;
 
 #[ORM\Entity(repositoryClass: CompetitionRepository::class)]
 class Competition
@@ -29,6 +33,17 @@ class Competition
     #[ORM\Column(length: 50, nullable: true, unique: true)]
     private ?string $externalIdAnotherapi = null;
 
+    /**
+     * @var Collection<int, Event>
+     */
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'competition')]
+    private Collection $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -42,7 +57,6 @@ class Competition
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -54,7 +68,6 @@ class Competition
     public function setSeason(string $season): static
     {
         $this->season = $season;
-
         return $this;
     }
 
@@ -66,19 +79,17 @@ class Competition
     public function setSport(?Sports $sport): static
     {
         $this->sport = $sport;
-
         return $this;
     }
 
-    public function getyexternalIdSportradar(): ?string
+    public function getExternalIdSportradar(): ?string
     {
         return $this->externalIdSportradar;
     }
 
-    public function setyexternalIdSportradar(?string $externalIdSportradar): static
+    public function setExternalIdSportradar(?string $externalIdSportradar): static
     {
         $this->externalIdSportradar = $externalIdSportradar;
-
         return $this;
     }
 
@@ -87,10 +98,36 @@ class Competition
         return $this->externalIdAnotherapi;
     }
 
-    public function setExternalIdAnotherapi(string $externalIdAnotherapi): static
+    public function setExternalIdAnotherapi(?string $externalIdAnotherapi): static
     {
         $this->externalIdAnotherapi = $externalIdAnotherapi;
+        return $this;
+    }
 
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setCompetition($this);
+        }
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            if ($event->getCompetition() === $this) {
+                $event->setCompetition(null);
+            }
+        }
         return $this;
     }
 }
