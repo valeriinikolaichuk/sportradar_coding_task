@@ -26,12 +26,15 @@ class Competition
     #[ORM\ManyToOne(inversedBy: 'competitions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Sports $sport = null;
-
+/*
     #[ORM\Column(length: 50, nullable: true, unique: true)]
     private ?string $externalIdSportradar = null;
 
     #[ORM\Column(length: 50, nullable: true, unique: true)]
     private ?string $externalIdAnotherapi = null;
+*/
+    #[ORM\Column(length: 50, unique: true)]
+    private ?string $external_id = null;
 
     /**
      * @var Collection<int, Event>
@@ -92,7 +95,7 @@ class Competition
         $this->externalIdSportradar = $externalIdSportradar;
         return $this;
     }
-
+/*
     public function getExternalIdAnotherapi(): ?string
     {
         return $this->externalIdAnotherapi;
@@ -102,6 +105,18 @@ class Competition
     {
         $this->externalIdAnotherapi = $externalIdAnotherapi;
         return $this;
+    }
+*/
+
+    public function getExternalId(): ?string 
+    { 
+        return $this->external_id;
+    }
+    
+    public function setExternalId(string $external_id): static 
+    { 
+        $this->external_id = $external_id; 
+        return $this; 
     }
 
     /**

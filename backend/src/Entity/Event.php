@@ -34,8 +34,8 @@ class Event
     #[ORM\Column(nullable: true)]
     private ?int $awayScore = null;
 
-    #[ORM\Column(length: 150, nullable: true)]
-    private ?string $winner = null;
+//    #[ORM\Column(length: 150, nullable: true)]
+//    private ?string $winner = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
@@ -58,6 +58,28 @@ class Event
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
     private ?Team $awayTeam = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Team $winnerTeam = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $message = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $goals = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $yellowCards = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $secondYellowCards = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $directRedCards = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $scoreByPeriods = null;
 
     public function getId(): ?int
     {
@@ -118,7 +140,7 @@ class Event
         $this->awayScore = $awayScore;
         return $this;
     }
-
+/*
     public function getWinner(): ?string
     {
         return $this->winner;
@@ -129,7 +151,7 @@ class Event
         $this->winner = $winner;
         return $this;
     }
-
+*/
     public function getCompetition(): ?Competition
     {
         return $this->competition;
@@ -193,6 +215,83 @@ class Event
     public function setAwayTeam(?Team $awayTeam): static
     {
         $this->awayTeam = $awayTeam;
+        return $this;
+    }
+
+        public function getWinnerTeam(): ?Team
+    {
+        return $this->winnerTeam;
+    }
+
+    public function setWinnerTeam(?Team $winnerTeam): static
+    {
+        $this->winnerTeam = $winnerTeam;
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): static
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    public function getGoals(): ?array
+    {
+        return $this->goals;
+    }
+
+    public function setGoals(?array $goals): static
+    {
+        $this->goals = $goals;
+        return $this;
+    }
+
+    public function getYellowCards(): ?array
+    {
+        return $this->yellowCards;
+    }
+
+    public function setYellowCards(?array $yellowCards): static
+    {
+        $this->yellowCards = $yellowCards;
+        return $this;
+    }
+
+    public function getSecondYellowCards(): ?array
+    {
+        return $this->secondYellowCards;
+    }
+
+    public function setSecondYellowCards(?array $secondYellowCards): static
+    {
+        $this->secondYellowCards = $secondYellowCards;
+        return $this;
+    }
+
+    public function getDirectRedCards(): ?array
+    {
+        return $this->directRedCards;
+    }
+
+    public function setDirectRedCards(?array $directRedCards): static
+    {
+        $this->directRedCards = $directRedCards;
+        return $this;
+    }
+
+    public function getScoreByPeriods(): ?array
+    {
+        return $this->scoreByPeriods;
+    }
+
+    public function setScoreByPeriods(?array $scoreByPeriods): static
+    {
+        $this->scoreByPeriods = $scoreByPeriods;
         return $this;
     }
 }
