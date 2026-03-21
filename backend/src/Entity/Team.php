@@ -27,7 +27,7 @@ class Team
     private ?string $abbreviation = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(name: 'country_code', referencedColumnName: 'code', nullable: true)]
+    #[ORM\JoinColumn(name: '_country_code', referencedColumnName: 'code', nullable: true)]
     private ?Country $country = null;
 
     public function getId(): ?int

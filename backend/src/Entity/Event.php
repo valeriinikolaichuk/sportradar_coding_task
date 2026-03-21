@@ -35,29 +35,31 @@ class Event
     private ?int $awayScore = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "_competition_id", nullable: false)]
     private ?Competition $competition = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(name: "_stage_id", nullable: true)]
     private ?Stage $stage = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(name: "_group_id", nullable: true)]
     private ?Groups $groupTable = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: "_stadium_id", nullable: true)]
     private ?Stadium $stadium = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(name: "_home_team_id", nullable: true)]
     private ?Team $homeTeam = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(name: "_away_team_id", nullable: true)]
     private ?Team $awayTeam = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(name: "_winner_team_id", nullable: true)]
     private ?Team $winnerTeam = null;
 
     #[ORM\Column(type: 'text', nullable: true)]

@@ -22,7 +22,7 @@ class Groups
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'groups')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "_stage_id", nullable: false)]
     private ?Stage $stage = null;
 
     /**

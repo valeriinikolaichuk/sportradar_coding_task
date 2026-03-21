@@ -16,10 +16,11 @@ class GroupStanding
     private ?int $id = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: "_team_id", nullable: false)]
     private ?Team $team = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "_group_id", nullable: false)]
     private ?Groups $groupId = null;
 
     #[ORM\Column(nullable: true)]
