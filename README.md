@@ -1,6 +1,6 @@
 <div align="center">
   <h2>sports event calendar</h2>
-  <h4><a href="[https://github.com/valeriinikolaichuk/sportradar_coding_task]">sports event calendar github</a></h4>
+  <h4><a href="https://github.com/valeriinikolaichuk/sportradar_coding_task">sports event calendar github</a></h4>
 </div>
   <br />
 <details open="open">
