@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StadiumRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Country;
 
 #[ORM\Entity(repositoryClass: StadiumRepository::class)]
 class Stadium

@@ -34,9 +34,6 @@ class Event
     #[ORM\Column(nullable: true)]
     private ?int $awayScore = null;
 
-//    #[ORM\Column(length: 150, nullable: true)]
-//    private ?string $winner = null;
-
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Competition $competition = null;
@@ -140,18 +137,7 @@ class Event
         $this->awayScore = $awayScore;
         return $this;
     }
-/*
-    public function getWinner(): ?string
-    {
-        return $this->winner;
-    }
 
-    public function setWinner(?string $winner): static
-    {
-        $this->winner = $winner;
-        return $this;
-    }
-*/
     public function getCompetition(): ?Competition
     {
         return $this->competition;
