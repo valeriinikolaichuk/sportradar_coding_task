@@ -34,7 +34,8 @@ An open-source relational database management system based on SQL. It provides a
 
 ## Database
 
-For a detailed explanation of the database structure see:
+For a detailed explanation of the database structure see:  
+➡ [Database Documentation](docs/database/database.md)
 
 ## Project Structure
 
