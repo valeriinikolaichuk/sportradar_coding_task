@@ -52,6 +52,7 @@ These tables represent the primary business entities of the system and are used 
 ### - allowed_external_id
 - Stores allowed external identifiers
 - Used to validate incoming API data
+- No direct relations with core tables
 - Ensures only trusted IDs are processed
   
 ---
