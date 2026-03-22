@@ -6,3 +6,17 @@
 /vendor/
 /var/
 /.env.local
+/.env.test.local
+
+# Node / Frontend
+/frontend/node_modules/
+/frontend/package-lock.json
+/frontend/yarn.lock
+
+# Build output (Webpack Encore)
+backend/public/build/
+
+# IDE / OS
+/.idea/
+/.vscode/
+/.DS_Store
