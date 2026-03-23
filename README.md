@@ -29,6 +29,9 @@ An open platform for developing, shipping, and running applications. It allows t
 #### [Symfony](https://symfony.com/)
 An open-source, free PHP framework designed for building complex web applications, APIs, and microservices.
 
+#### [PHPUnit](https://phpunit.de/)
+A programmer-oriented testing framework for PHP. It is an instance of the xUnit architecture for unit testing frameworks, allowing developers to automate testing, ensure code quality, and find regressions during the development of complex applications.
+
 #### [MySQL](https://www.mysql.com/)
 An open-source relational database management system based on SQL. It provides a fast, reliable, and scalable solution for managing structured data, widely used for web applications and content management systems.
 
