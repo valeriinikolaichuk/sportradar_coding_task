@@ -39,6 +39,11 @@ These tables represent the primary business entities of the system and are used 
 - Connected with `Stage` and `Event`
 - Optional (not all competitions use groups)
 
+### - group_standing
+- Stores team positions within a group
+- Connected with `Team` and `Groups`
+- Used to track rankings in group stages of a competition
+
 ---
 
 ### 2. Mapping / Integration Tables
