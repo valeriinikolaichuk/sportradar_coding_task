@@ -8,14 +8,15 @@
         <a href="#">Sport</a> |
         <a href="#">Competition</a> |
         <a href="#">Seasons</a> |
-        <a href="#" data-turbo-action="sort" data-sort="asc">Date ↑</a> |
-        <a href="#" data-turbo-action="sort" data-sort="desc">Date ↓</a> |
+        <a href="#" data-action="click->events#sortAsc">Date ↑</a> |
+        <a href="#" data-action="click->events#sortDesc">Date ↓</a> |
     </nav>
 
     <main>
         <turbo-frame 
             id="events-container" 
             data-controller="events">
+            {% include 'events/_table.html.twig' with { events: events } %}
         </turbo-frame>
     </main>
 {% endblock %}
