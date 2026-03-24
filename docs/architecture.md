@@ -57,10 +57,9 @@ This document describes the **backend architecture** of the project
 **Role:**
 - Handles fetching and mapping a single event by its ID.
 - Provides a dedicated API endpoint or controller action for fetching a single event.
-   Retrieve a single Event entity from the database using EventRepository.
-Map the raw Event entity into a structured EventDTO using SingleEventMapper.
-Return null or a 404 response if the event does not exist.
-Reuse existing DTOs (EventDTO, TeamDTO, ResultDTO, StageDTO) for consistent frontend data structure.
+- Retrieve a single `Event` entity from the database using `EventRepository`.
+- Map the raw `Event` entity into a structured `EventDTO` using `EventMapper`.
+- Reuse existing DTOs (`EventDTO`, `TeamDTO`, `ResultDTO`, `StageDTO`) for consistent frontend data structure.
 
 |Component	|Responsibility|
 |----------|-----------|
@@ -68,3 +67,20 @@ Reuse existing DTOs (EventDTO, TeamDTO, ResultDTO, StageDTO) for consistent fron
 |SingleEventService	|Core service that fetches a single event from `EventRepository` and maps it using `EventMapper`.|
 |EventMapper |Converts Event entity into `EventDTO` (including nested `TeamDTO`, `ResultDTO`, `StageDTO`).|
 |EventDTO	|Represents a single event in frontend-ready format.|
+
+---
+
+### AddEvent Module
+**Role:**
+- Handles creating and saving new events in the database.
+- Ensures related entities (teams, competition, stage) are linked correctly.
+- Returns the created event as a DTO for frontend use.
+
+|Component	|Responsibility|
+|----------|-----------|
+|AddEventController	|Handles HTTP POST requests for creating new events.|
+|AddEventService	|Core logic: validates input, creates `Event` entity, persists it, maps to DTO.|
+|EventRepository	|Provides access to `Event` entities (optional for fetching references).|
+|EntityManagerInterface	|Persists and flushes new `Event` entities.|
+|EventMapper	|Maps `Even`t entity to `EventDTO` (reused from EventPipeline module).|
+|EventDTO	|Represents event data for frontend display, consistent with event list and single event modules.|
