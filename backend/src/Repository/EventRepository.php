@@ -18,36 +18,16 @@ class EventRepository extends ServiceEntityRepository
 
     public function findAllEvents(): array
     {
-        return $this ->createQueryBuilder('e')
+        return $this->createQueryBuilder('e')
             ->leftJoin('e.homeTeam', 'ht')
             ->leftJoin('e.awayTeam', 'at')
-            ->addSelect('ht', 'at')
+            ->leftJoin('e.stage', 's')
+            ->leftJoin('e.competition', 'c')
+            ->leftJoin('e.winnerTeam', 'wt')
+            ->leftJoin('e.stadium', 'st')
+            ->leftJoin('e.groupTable', 'g')
+            ->addSelect('ht', 'at', 's', 'c', 'wt', 'st', 'g')
             ->getQuery()
             ->getResult();
     }
-
-    //    /**
-    //     * @return Event[] Returns an array of Event objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Event
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }
