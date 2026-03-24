@@ -31,3 +31,7 @@ This document describes the **backend architecture** of the project
 - Keeps the controller thin — it only receives input and delegates processing to the pipeline.
 - Designed for extensibility: new filters or transformations can be added as separate pipeline steps without modifying existing logic.
 - Supports both default and parameter-driven scenarios (e.g., ascending/descending sorting) in a unified flow.
+
+|Component| Responsibility |
+|----------|-----------|
+|EventController|Acts as a thin layer that receives input (JSON request), invokes the pipeline, and returns rendered HTML|
