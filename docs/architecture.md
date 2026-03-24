@@ -27,11 +27,24 @@ This document describes the **backend architecture** of the project
 - Follows a **Pipeline architecture**, where data is processed step-by-step through independent components.
 - Uses a single repository for data access, ensuring consistency across all scenarios.
 - Applies business logic (default selection, sorting) through dedicated pipeline steps rather than controllers.
-- Transforms entities into DTOs before sending data to the view layer.
+- Transforms entities into **DTO**s before sending data to the view layer.
 - Keeps the controller thin — it only receives input and delegates processing to the pipeline.
 - Designed for extensibility: new filters or transformations can be added as separate pipeline steps without modifying existing logic.
 - Supports both default and parameter-driven scenarios (e.g., ascending/descending sorting) in a unified flow.
 
 |Component| Responsibility |
 |----------|-----------|
-|EventController|Acts as a thin layer that receives input (JSON request), invokes the pipeline, and returns rendered HTML|
+|EventController|Entry point for `/events` endpoint. Acts as a layer that receives request and returns rendered HTML|
+|EventPipelineFactory|Assembles ordered pipeline steps and returns configured EventPipeline instance|
+|EventPipeline|Executes all processing steps sequentially using `supports()` and `process()`|
+|EventPipelineInterface|Defines a contract for all **pipeline** steps. Ensures consistent structure for processing event data|
+|EventProvider|Fetches events from database via `EventRepository`|
+|DefaultEventFilter|Splits events into past and future, applies limits|
+|SortAscScenario|Sorts events by datetime ascending|
+|SortDescScenario|Sorts events by datetime descending|
+|EventMapper	|Transforms `Event` entities into DTO objects for presentation|
+|EventDTO	|Main data structure for UI (date, time, teams, result, competition, etc.)|
+|TeamDTO	|Represents team-related data (name, slug, country code, etc.)|
+|ResultDTO	|Encapsulates match result (scores, winner, metadata)|
+|StageDTO	|Represents competition stage information|
+|events_controller.js|**Stimulus** controller responsible for loading and updating event table|
