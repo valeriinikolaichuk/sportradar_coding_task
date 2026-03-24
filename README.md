@@ -67,4 +67,4 @@ For a detailed explanation of the system architecture see:
 - The tests are written using **PHPUnit** and cover key components of the pipeline architecture.
 
 For a detailed information see:    
-➡ [Architecture Documentation](docs/architecture.md)
+➡ [Testing Documentation](docs/testing.md)
