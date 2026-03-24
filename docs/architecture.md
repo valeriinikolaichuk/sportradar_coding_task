@@ -50,3 +50,21 @@ This document describes the **backend architecture** of the project
 |events_controller.js|**Stimulus** controller responsible for loading and updating event table|
 
 ➡ [Event Module](./modules/events_module.md)
+
+---
+
+### SingleEvent Module
+**Role:**
+- Handles fetching and mapping a single event by its ID.
+- Provides a dedicated API endpoint or controller action for fetching a single event.
+   Retrieve a single Event entity from the database using EventRepository.
+Map the raw Event entity into a structured EventDTO using SingleEventMapper.
+Return null or a 404 response if the event does not exist.
+Reuse existing DTOs (EventDTO, TeamDTO, ResultDTO, StageDTO) for consistent frontend data structure.
+
+|Component	|Responsibility|
+|----------|-----------|
+|SingleEventController	|Handles HTTP requests for a single event.|
+|SingleEventService	|Core service that fetches a single event from `EventRepository` and maps it using `EventMapper`.|
+|EventMapper |Converts Event entity into `EventDTO` (including nested `TeamDTO`, `ResultDTO`, `StageDTO`).|
+|EventDTO	|Represents a single event in frontend-ready format.|
