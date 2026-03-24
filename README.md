@@ -54,5 +54,5 @@ For a detailed explanation of the database structure see:
 ## Project Structure
 
 For a detailed explanation of the system architecture see:    
-➡ [Architecture Documentation](docs/modules/architecture.md)
+➡ [Architecture Documentation](docs/architecture.md)
 
