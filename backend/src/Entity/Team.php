@@ -89,4 +89,9 @@ class Team
         $this->country = $country;
         return $this;
     }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->country?->getCode();
+    }
 }

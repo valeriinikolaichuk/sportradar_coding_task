@@ -11,7 +11,7 @@ class DefaultEventFilter implements EventPipelineInterface
 
     public function process(array $events, array $params): array
     {
-        $now = new \DateTimeImmutable('2024-01-03 04:00:00');
+        $now = new \DateTimeImmutable('2024-01-03 06:00:00');
 
         $past = array_filter($events, fn($e) =>
             $e->getDateTime() < $now

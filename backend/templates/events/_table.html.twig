@@ -4,18 +4,68 @@
             <th>Date</th>
             <th>Time</th>
             <th>Competition</th>
+            <th>Season</th>
             <th>Teams</th>
             <th>Result</th>
+            <th>Stage</th>
+            <th>Goals</th>
+            <th>Cards</th>
         </tr>
     </thead>
     <tbody>
         {% for event in events %}
             <tr>
-                <td>{{ event.date }}</td>
-                <td>{{ event.time }}</td>
-                <td>{{ event.competition }}</td>
-                <td>{{ event.homeTeam }} - {{ event.awayTeam }}</td>
-                <td>{{ event.result ?? '-' }}</td>
+                <td>{{ event.dateVenue }}</td>
+                <td>{{ event.timeVenueUTC }}</td>
+
+                <td>{{ event.originCompetitionName ?? '-' }}</td>
+                <td>{{ event.season }}</td>
+
+                <td>
+                    {% if event.homeTeam %}{{ event.homeTeam.name }} ({{ event.homeTeam.abbreviation }}){% else %}-{% endif %}
+                     -
+                    {% if event.awayTeam %}{{ event.awayTeam.name }} ({{ event.awayTeam.abbreviation }}){% else %}-{% endif %}
+                </td>
+
+                <td>
+                    {% if event.result %}
+                        {{ event.result.homeGoals }} : {{ event.result.awayGoals }}
+                        {% if event.result.winner %}
+                            (Winner: {{ event.result.winner }})
+                        {% endif %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if event.stage %}{{ event.stage.name }}{% else %}-{% endif %}
+                </td>
+
+                <td>
+                    {% if event.result and event.result.goals is not empty %}
+                        {% for goal in event.result.goals %}
+                            {{ goal.minute }}' - {{ goal.scorer }}<br>
+                        {% endfor %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if event.result %}
+                        {% set cards = event.result.yellowCards|merge(event.result.secondYellowCards)|merge(event.result.directRedCards) %}
+                        {% if cards is not empty %}
+                            {% for card in cards %}
+                                {{ card.minute }}' - {{ card.player }} ({{ card.type }})<br>
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </tbody>

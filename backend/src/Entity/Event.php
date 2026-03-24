@@ -282,4 +282,20 @@ class Event
         $this->scoreByPeriods = $scoreByPeriods;
         return $this;
     }
+
+    public function getDateTime(): \DateTimeImmutable
+    {
+        $date = $this ->getMatchDate();
+        $time = $this ->getMatchTime();
+
+        if (!$date) {
+            throw new \LogicException('Match date is missing');
+        }
+
+        $timeString = $time ? $time ->format('H:i:s') : '00:00:00';
+
+        return new \DateTimeImmutable(
+            $date ->format('Y-m-d') . ' ' . $timeString
+        );
+    }
 }

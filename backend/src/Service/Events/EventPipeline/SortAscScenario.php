@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Events;
+namespace App\Service\Events\EventPipeline;
 
 class SortAscScenario implements EventPipelineInterface
 {
