@@ -30,4 +30,18 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findOneEventWithRelations(int $id): ?Event
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.homeTeam', 'ht')
+            ->leftJoin('e.awayTeam', 'at')
+            ->leftJoin('e.competition', 'c')
+            ->leftJoin('e.stage', 's')
+            ->addSelect('ht', 'at', 'c', 's')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

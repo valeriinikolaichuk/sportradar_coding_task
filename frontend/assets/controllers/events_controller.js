@@ -24,4 +24,22 @@ export default class extends Controller {
             document.getElementById('events-container').innerHTML = html;
         });
     }
+
+    loadOne(id) {
+        fetch(`/event/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                const eventDTO = data.data;
+                document.getElementById('event-modal-body').innerHTML = `
+                    <p><strong>Date:</strong> ${eventDTO.date}</p>
+                    <p><strong>Time:</strong> ${eventDTO.time}</p>
+                    <p><strong>Competition:</strong> ${eventDTO.competition}</p>
+                    <p><strong>Stage:</strong> ${eventDTO.stage?.name ?? '-'}</p>
+                    <p><strong>Teams:</strong> ${eventDTO.homeTeam?.name ?? '-'} vs ${eventDTO.awayTeam?.name ?? '-'}</p>
+                    <p><strong>Result:</strong> ${eventDTO.result?.homeGoals ?? '-'} : ${eventDTO.result?.awayGoals ?? '-'}</p>
+                `;
+                const modal = new bootstrap.Modal(document.getElementById('event-modal'));
+                modal.show();
+            });
+    }
 }
