@@ -8,10 +8,10 @@
 
 - [About the project](#about-the-project)
   - [Built With](#built-with)
+- [Author](#author)
 - [Database](#database)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
-- [Author](#author)
 
 </details>
 
@@ -51,8 +51,20 @@ Turbo and Stimulus are used to update the events table dynamically without a ful
 For a detailed explanation of the database structure see:  
 ➡ [Database Documentation](docs/database/database.md)
 
+---
+
 ## Project Structure
 
 For a detailed explanation of the system architecture see:    
 ➡ [Architecture Documentation](docs/architecture.md)
 
+---
+
+## Testing
+### Overview
+
+- The Events module includes basic unit tests to ensure core pipeline functionality works as expected.  
+- The tests are written using **PHPUnit** and cover key components of the pipeline architecture.
+
+For a detailed information see:    
+➡ [Architecture Documentation](docs/architecture.md)
