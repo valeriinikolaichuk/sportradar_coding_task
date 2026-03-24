@@ -1,0 +1,9 @@
+{
+  "controllers": {
+    "./events_controller.js": {
+      "enabled": true,
+      "fetch": "eager"
+    }
+  },
+  "entrypoints": []
+}
