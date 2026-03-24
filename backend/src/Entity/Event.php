@@ -25,14 +25,14 @@ class Event
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTime $matchTime = null;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $status = null;
+    #[ORM\Column(type: "string", columnDefinition: "ENUM('scheduled', 'played') NOT NULL")]
+    private string $status = 'scheduled';
 
-    #[ORM\Column(nullable: true)]
-    private ?int $homeScore = null;
+    #[ORM\Column(type: "integer", nullable: false, options: ["default" => 0])]
+    private int $homeScore = 0;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $awayScore = null;
+    #[ORM\Column(type: "integer", nullable: false, options: ["default" => 0])]
+    private int $awayScore = 0;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(name: "_competition_id", nullable: false)]
