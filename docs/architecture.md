@@ -48,3 +48,5 @@ This document describes the **backend architecture** of the project
 |ResultDTO	|Encapsulates match result (scores, winner, metadata)|
 |StageDTO	|Represents competition stage information|
 |events_controller.js|**Stimulus** controller responsible for loading and updating event table|
+
+➡ [Event Module](./modules/events_module.md)
