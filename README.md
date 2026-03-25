@@ -19,7 +19,8 @@
 
 ## About the Project
 
-
+This project is a Symfony-based web application that displays and sorts events dynamically using a modern frontend stack with Stimulus and Turbo.
+The application fetches event data asynchronously and updates the UI without full page reloads, providing a smooth user experience.
 
 ### Built With
 
