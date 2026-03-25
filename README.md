@@ -8,7 +8,7 @@
 
 - [About the project](#about-the-project)
   - [Built With](#built-with)
-- [Author](#author)
+- [Setup and Run Instructions](#Setup-and-Run-Instructions)
 - [Database](#database)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
@@ -44,6 +44,36 @@ A modest JavaScript framework for the HTML you already have. It focuses on enhan
 
 - Notes:
 Turbo and Stimulus are used to update the events table dynamically without a full SPA. Turbo handles partial page updates via <turbo-frame>, while Stimulus manages user interactions such as sorting and filtering with minimal JavaScript. This approach keeps the backend responsible for all business logic, reduces unnecessary page reloads, and avoids the overhead of heavy frontend frameworks.
+
+---
+
+## Setup and Run Instructions
+- Clone the project
+`git clone <repository-url>`
+`cd sportradar_coding_task`
+- Start the application
+`docker-compose up --build`
+- Open the application
+Frontend is available at:
+`http://localhost:8084`
+- Database access (optional)
+You can access phpMyAdmin at:
+`http://localhost:8085`
+
+**Credentials:**
+
+Server: symfony_new_mysql
+Username: symfony
+Password: symfony
+📌 Notes
+Symfony application is served via Nginx
+Project files are mounted into the container at /var/www/html
+MySQL runs on port 3310 (external access)
+⚠️ Troubleshooting
+
+If something doesn’t work:
+`docker-compose down`
+`docker-compose up --build`
 
 ---
 
