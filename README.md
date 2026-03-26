@@ -19,7 +19,7 @@
 
 ## About the Project
 
-A **sports event calendar** application for organizing, scheduling, and viewing sports events.
+A `sports event calendar` application for organizing, scheduling, and viewing sports events.
 This project is a Symfony-based web application that displays and sorts events dynamically using a modern frontend stack with Stimulus and Turbo.
 The application fetches event data asynchronously and updates the UI without full page reloads, providing a smooth user experience.
 
