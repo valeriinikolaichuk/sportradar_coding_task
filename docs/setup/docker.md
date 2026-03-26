@@ -25,5 +25,5 @@ phpMyAdmin: `http://localhost:8085`
 - Password: symfony
 
 ## YAML
-➡ [docker-compose.yml]([docker-compose.yml](https://github.com/valeriinikolaichuk/sportradar_coding_task/blob/main/docker-compose.yml))
+➡ [docker-compose.yml](https://github.com/valeriinikolaichuk/sportradar_coding_task/blob/main/docker-compose.yml)
 
