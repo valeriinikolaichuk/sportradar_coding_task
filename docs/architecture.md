@@ -82,5 +82,5 @@ This document describes the **backend architecture** of the project
 |AddEventService	|Core logic: validates input, creates `Event` entity, persists it, maps to DTO.|
 |EventRepository	|Provides access to `Event` entities (optional for fetching references).|
 |EntityManagerInterface	|Persists and flushes new `Event` entities.|
-|EventMapper	|Maps `Even`t entity to `EventDTO` (reused from EventPipeline module).|
+|EventMapper	|Maps `Event` entity to `EventDTO` (reused from **Event Module**).|
 |EventDTO	|Represents event data for frontend display, consistent with event list and single event modules.|
