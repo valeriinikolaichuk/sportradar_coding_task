@@ -29,7 +29,7 @@ phpMyAdmin	http://localhost:8085
 - Install dependencies  
 `docker compose exec app composer install`  
 - Create database  
-`docker compose exec app php bin/console doctrine:database:create`  
+`docker compose exec db mysql -u symfony -psymfony symfony_new < docker/db/dump.sql`  
 - Run migrations  
 `docker compose exec app php bin/console doctrine:migrations:migrate`  
 - Clear cache  
