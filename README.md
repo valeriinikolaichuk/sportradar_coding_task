@@ -43,7 +43,7 @@ A set of complementary techniques for speeding up page changes and form submissi
 A modest JavaScript framework for the HTML you already have. It focuses on enhancing static HTML by connecting JavaScript objects  to elements on the page using simple data attributes, making it perfect for adding specific interactive behaviors.
 
 - Notes:
-Turbo and Stimulus are used to update the events table dynamically without a full SPA. Turbo handles partial page updates via <turbo-frame>, while Stimulus manages user interactions such as sorting and filtering with minimal JavaScript. This approach keeps the backend responsible for all business logic, reduces unnecessary page reloads, and avoids the overhead of heavy frontend frameworks.
+Turbo and Stimulus are used to update the events table dynamically without a full SPA. Turbo handles partial page updates via <turbo-frame> without any JavaScript code (only minimal js controller-based logic). This approach keeps the backend responsible for all business logic, reduces unnecessary page reloads, and avoids the overhead of heavy frontend frameworks.
 
 ---
 
