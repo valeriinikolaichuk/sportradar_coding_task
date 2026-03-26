@@ -51,6 +51,8 @@ Turbo and Stimulus are used to update the events table dynamically without a ful
 
 How to run the project:    
 ➡ [Docker](docs/setup/docker.md)
+➡ [Symfony](docs/setup/symfony.md)
+
 
 ---
 
