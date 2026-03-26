@@ -48,32 +48,9 @@ Turbo and Stimulus are used to update the events table dynamically without a ful
 ---
 
 ## Setup and Run Instructions
-- Clone the project
-`git clone <repository-url>`
-`cd sportradar_coding_task`
-- Start the application
-`docker-compose up --build`
-- Open the application
-Frontend is available at:
-`http://localhost:8084`
-- Database access (optional)
-You can access phpMyAdmin at:
-`http://localhost:8085`
 
-**Credentials:**
-
-Server: symfony_new_mysql
-Username: symfony
-Password: symfony
-📌 Notes
-Symfony application is served via Nginx
-Project files are mounted into the container at /var/www/html
-MySQL runs on port 3310 (external access)
-⚠️ Troubleshooting
-
-If something doesn’t work:
-`docker-compose down`
-`docker-compose up --build`
+How to run the project:    
+➡ [Docker](docs/setup/docker.md)
 
 ---
 
