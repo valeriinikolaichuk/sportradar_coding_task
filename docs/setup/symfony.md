@@ -35,6 +35,12 @@ phpMyAdmin	http://localhost:8085
 - Clear cache  
 `docker compose exec app php bin/console cache:clear`
 
+## Installation
+
+Install required Symfony components:  
+`composer require symfony/serializer`  
+`composer require symfony/validator`
+
 ## Stop project  
 `docker compose down`
 - Rebuild containers  
