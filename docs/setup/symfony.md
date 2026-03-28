@@ -39,7 +39,11 @@ phpMyAdmin	http://localhost:8085
 
 Install required Symfony components:  
 `composer require symfony/serializer`  
-`composer require symfony/validator`
+`composer require symfony/validator`   
+`composer require symfony/webpack-encore-bundle`  
+`apt update`  
+`apt install -y nodejs npm`  
+`npm install --save-dev @symfony/webpack-encore`
 
 ## Stop project  
 `docker compose down`
