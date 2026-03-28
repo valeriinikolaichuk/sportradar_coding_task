@@ -74,11 +74,11 @@ This document describes the **backend architecture** of the project
 **Role:**
 - Handles creating and saving new events in the database.
 - Ensures related entities (teams, competition, stage) are linked correctly.
-- Returns the created event as a DTO for frontend use.
+- Returns the created event as a DTO for frontend use or error.
 
 |Component	|Responsibility|
 |----------|-----------|
-|AddEventController	|Handles HTTP POST requests for creating new events.|
+|AddEventController	|Handles `HTTP POST` requests for creating new events. Deserializes incoming `JSON` data into a `DTO`, validates the input, and delegates the business logic to the service layer.|
 |AddEventService	|Core logic: validates input, creates `Event` entity, persists it, maps to DTO.|
 |EventRepository	|Provides access to `Event` entities (optional for fetching references).|
 |EntityManagerInterface	|Persists and flushes new `Event` entities.|
