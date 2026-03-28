@@ -36,8 +36,8 @@ phpMyAdmin	http://localhost:8085
 `docker compose exec app php bin/console cache:clear`
 
 ## Installation
+- Install required Symfony components:  
 
-Install required Symfony components:  
 `composer require symfony/serializer`  
 `composer require symfony/validator`   
 `composer require symfony/webpack-encore-bundle`  
