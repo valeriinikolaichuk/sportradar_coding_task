@@ -2,45 +2,54 @@
 
 namespace App\Service\AddEvent;
 
-use App\Repository\EventRepository;
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Service\Events\EventPipeline\EventMapper;
 use App\Entity\Event;
 use App\Entity\Team;
 use App\Entity\Competition;
 use App\Entity\Stage;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\DTO\EventDTO;
 
 class AddEventService
 {
-    private EventRepository $repository;
     private EventMapper $mapper;
     private EntityManagerInterface $em;
 
     public function __construct(
-        EventRepository $repository, 
         EventMapper $mapper, 
         EntityManagerInterface $em
     ){
-        $this -> repository = $repository;
         $this -> mapper = $mapper;
         $this -> em = $em;
     }
 
-    public function createEvent(array $data): ?\App\Service\EventDTO
+    public function createEvent(CreateEventDTO $dto): ?EventDTO
     {
-        $homeTeam = $this -> em ->getReference(Team::class, $data['homeTeamId']);
-        $awayTeam = $this -> em ->getReference(Team::class, $data['awayTeamId']);
-        $competition = $this -> em ->getReference(Competition::class, $data['competitionId']);
-        $stage = isset($data['stageId']) ? $this -> em ->getReference(Stage::class, $data['stageId']) : null;
+        $homeTeam = $this ->em ->getRepository(Team::class)->find($dto -> homeTeamId);
+        $awayTeam = $this ->em ->getRepository(Team::class)->find($dto -> awayTeamId);
+        $competition = $this ->em ->getRepository(Competition::class)->find($dto -> competitionId);
+
+        if (!$homeTeam || !$awayTeam || !$competition) {
+            throw new NotFoundHttpException('Related entity not found');
+        }
+
+        $stage = $dto->stageId
+            ? $this ->em ->getRepository(Stage::class)->find($dto -> stageId)
+            : null;
+
+        if ($dto -> stageId && !$stage) {
+            throw new NotFoundHttpException('Stage not found');
+        }
 
         $event = new Event();
         $event ->setHomeTeam($homeTeam);
         $event ->setAwayTeam($awayTeam);
         $event ->setCompetition($competition);
         $event ->setStage($stage);
-        $event ->setMatchDate(new \DateTimeImmutable($data['date']));
-        $event ->setMatchTime(new \DateTimeImmutable($data['time']));
-        $event ->setStatus($data['status'] ?? 'scheduled');
+        $event ->setMatchDate(new \DateTimeImmutable($dto -> date));
+        $event ->setMatchTime(new \DateTimeImmutable($dto -> time));
+        $event ->setStatus($dto -> status);
 
         $this ->em ->persist($event);
         $this ->em ->flush();

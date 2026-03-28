@@ -14,7 +14,7 @@ use App\Service\AddEvent\AddEventService;
 
 class AddEventController extends AbstractController
 {
-    #[Route('/create', name: 'add_event', methods: ['POST'])]
+    #[Route('/new_event', name: 'add_event', methods: ['POST'])]
     public function create(
         Request $request,
         SerializerInterface $serializer,
@@ -29,23 +29,30 @@ class AddEventController extends AbstractController
                 'json'
             );
         } catch (\Exception $e) {
-            return $this->json(['error' => 'Invalid JSON'], 400);
+            return $this ->json(['error' => 'Invalid JSON'], 400);
         }
 
+        $errors = $validator ->validate($dto);
 
+        if (count($errors) > 0) {
+            $formattedErrors = [];
 
-//        $data = json_decode($request ->getContent(), true);
-/*
-        if (!$data) {
-            return $this->json(['error' => 'Invalid request data'], 400);
+            foreach ($errors as $error) {
+                $formattedErrors[] = [
+                    'field' => $error ->getPropertyPath(),
+                    'message' => $error ->getMessage()
+                ];
+            }
+
+            return $this ->json([
+                'errors' => $formattedErrors
+            ], 400);
         }
-*/
-        try {
-            $eventDTO = $this -> service ->createEvent($data);
-        } catch (\Exception $e) {
-            return $this ->json(['error' => $e->getMessage()], 400);
-        }
 
-        return $this ->json(['data' => $eventDTO], 201);
+        $event = $this ->service ->createEvent($dto);
+
+        return $this ->json([
+            'data' => $event
+        ], 201);
     }
 }
