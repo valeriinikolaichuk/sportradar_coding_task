@@ -7,14 +7,9 @@
 
 {% block body %}
     <h1>Sports Events</h1>
-    <nav>
-        <a href="#">Sport</a> |
-        <a href="#">Competition</a> |
-        <a href="#">Seasons</a> |
-        <a href="#" data-action="click->events#sortAsc">Date ↑</a> |
-        <a href="#" data-action="click->events#sortDesc">Date ↓</a> |
-    </nav>
 
+    {% include 'components/_toolbar.html.twig' %}
+    
     <main>
         <turbo-frame 
             id="events-container" 
