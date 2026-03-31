@@ -49,10 +49,11 @@ class AddEventController extends AbstractController
             ], 400);
         }
 
-        $event = $this ->service ->createEvent($dto);
+        $service ->createEvent($dto);
 
-        return $this ->json([
-            'data' => $event
+        return $this->json([
+            'success' => true,
+            'reloadUrl' => $this->generateUrl('events_index')
         ], 201);
     }
 }

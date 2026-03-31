@@ -42,4 +42,26 @@ export default class extends Controller {
                 modal.show();
             });
     }
+
+    createEvent(data) {
+        fetch('/new_event', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.errors) {
+                console.log('Validation errors:', data.errors);
+                return;
+            }
+
+            if (data.reloadUrl) {
+                this.load();
+            }
+        });
+    }
 }

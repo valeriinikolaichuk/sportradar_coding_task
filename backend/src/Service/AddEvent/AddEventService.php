@@ -3,8 +3,8 @@
 namespace App\Service\AddEvent;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use App\Service\Events\EventPipeline\EventMapper;
 use App\Entity\Event;
 use App\Entity\Team;
 use App\Entity\Competition;
@@ -13,14 +13,11 @@ use App\Service\DTO\EventDTO;
 
 class AddEventService
 {
-    private EventMapper $mapper;
     private EntityManagerInterface $em;
 
-    public function __construct(
-        EventMapper $mapper, 
+    public function __construct( 
         EntityManagerInterface $em
     ){
-        $this -> mapper = $mapper;
         $this -> em = $em;
     }
 
@@ -53,7 +50,5 @@ class AddEventService
 
         $this ->em ->persist($event);
         $this ->em ->flush();
-
-        return $this -> mapper ->process([$event], [])[0];
     }
 }

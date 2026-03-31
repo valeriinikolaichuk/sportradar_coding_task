@@ -44,4 +44,21 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function existsSameEvent(int $homeId, int $awayId): bool
+    {
+        return (bool) $this->createQueryBuilder('e')
+            ->select('1')
+            ->where('e.homeTeam = :home')
+            ->andWhere('e.awayTeam = :away')
+            ->andWhere('e.matchDate = :date')
+            ->setParameters([
+                'home' => $homeId,
+                'away' => $awayId,
+                'date' => new \DateTimeImmutable($date),
+            ])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

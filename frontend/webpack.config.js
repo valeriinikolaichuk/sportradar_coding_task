@@ -12,4 +12,11 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction());
 
+    const config = Encore.getWebpackConfig();
+
+    config.watchOptions = {
+        poll: 1000,
+        ignored: /node_modules/
+    };
+    
 module.exports = Encore.getWebpackConfig();
