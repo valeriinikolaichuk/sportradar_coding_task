@@ -72,15 +72,18 @@ This document describes the **backend architecture** of the project
 
 ### AddEvent Module
 **Role:**
+- Receives JSON request data.
+- Validates the DTO using `Symfony Validator`.
+- Handles validation and deserialization errors.
 - Handles creating and saving new events in the database.
-- Ensures related entities (teams, competition, stage) are linked correctly.
-- Returns the created event as a DTO for frontend use or error message.
+- Returns JSON for frontend `events_controller.js`.
+- Interacts with the **Event Module** via `events_controller.js`.
 
 |Component	|Responsibility|
 |----------|-----------|
-|AddEventController	|Handles `HTTP POST` requests for creating new events. Deserializes incoming `JSON` data into a `CreateEventDTO`, validates the input, and delegates the business logic to the service layer.|
-|CreateEventDTO|A data transfer object used to carry and validate input data required for creating a new sports event.|
-|AddEventService	|Core logic: validates input, creates `Event` entity, persists it, maps to DTO.|
-|EntityManagerInterface	|Persists and flushes new `Event` entities.|
-|EventMapper	|Maps `Event` entity to `EventDTO` (reused from **Event Module**).|
-|EventDTO	|Represents event data for frontend display.|
+|AddEventController	|Deserializes JSON into `CreateEventDTO`. Validates the DTO using `Symfony Validator`. Handles validation and deserialization errors. Delegates business logic to `AddEventService`. Returns a JSON response.|
+|CreateEventDTO|A data transfer object used to carry and validate input data required for creating a new sports event. Uses Symfony validation constraints (NotBlank, Date, Choice). Uses a custom class-level constraint `UniqueEvent` to ensure event uniqueness|
+|UniqueEventValidator|Checks whether the DTO contains required identifiers. Calls `EventRepository::existsSameEvent`. This prevents creating duplicate matches with the same teams and date.|
+|AddEventService	|Creates a new `Event` entity.|  
+
+➡ [AddEvent Module](./modules/add_event_module.md)
