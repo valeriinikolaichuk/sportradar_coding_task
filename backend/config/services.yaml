@@ -9,24 +9,32 @@ services:
         resource: '../src/'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
 
-    App\Service\Events\EventPipeline\EventProvider:
+#    App\Service\Events\EventPipeline\EventProvider:
+#        arguments:
+#            - '@App\Repository\EventRepository'
+
+    App\Service\Events\EventPipeline\DefaultEventFilter:
         arguments:
             - '@App\Repository\EventRepository'
 
-    App\Service\Events\EventPipeline\DefaultEventFilter: ~
-
-    App\Service\Events\EventPipeline\SortAscScenario: ~
+#    App\Service\Events\EventPipeline\SortAscScenario: ~
 
     App\Service\Events\EventPipeline\SortDescScenario: ~
+
+    App\Service\Events\EventPipeline\SortByStageAsc: ~
+
+    App\Service\Events\EventPipeline\SortByStageDesc: ~
 
     App\Service\Events\EventPipeline\EventMapper: ~
 
     App\Service\Events\EventPipelineFactory:
         arguments:
-            - '@App\Service\Events\EventPipeline\EventProvider'
+#            - '@App\Service\Events\EventPipeline\EventProvider'
             - '@App\Service\Events\EventPipeline\DefaultEventFilter'
-            - '@App\Service\Events\EventPipeline\SortAscScenario'
+#            - '@App\Service\Events\EventPipeline\SortAscScenario'
             - '@App\Service\Events\EventPipeline\SortDescScenario'
+            - '@App\Service\Events\EventPipeline\SortByStageAsc'
+            - '@App\Service\Events\EventPipeline\SortByStageDesc'
             - '@App\Service\Events\EventPipeline\EventMapper'
 
     App\Controller\:

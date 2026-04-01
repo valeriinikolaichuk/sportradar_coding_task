@@ -2,29 +2,35 @@
 
 namespace App\Service\Events;
 
-use App\Service\Events\EventPipeline\EventProvider;
+//use App\Service\Events\EventPipeline\EventProvider;
 use App\Service\Events\EventPipeline\DefaultEventFilter;
-use App\Service\Events\EventPipeline\SortAscScenario;
+//use App\Service\Events\EventPipeline\SortAscScenario;
 use App\Service\Events\EventPipeline\SortDescScenario;
+use App\Service\Events\EventPipeline\SortByStageAsc;
+use App\Service\Events\EventPipeline\SortByStageDesc;
 use App\Service\Events\EventPipeline\EventMapper;
 
 class EventPipelineFactory
 {
     public function __construct(
-        private EventProvider $provider,
+//        private EventProvider $provider,
         private DefaultEventFilter $filter,
-        private SortAscScenario $sortAsc,
+//        private SortAscScenario $sortAsc,
         private SortDescScenario $sortDesc,
+        private SortByStageAsc $sortByStageAsc,
+        private SortByStageDesc $sortByStageDesc, 
         private EventMapper $mapper
     ) {}
 
     public function create(): EventPipeline
     {
         return new EventPipeline([
-            $this ->provider,
+//            $this ->provider,
             $this ->filter,
-            $this ->sortAsc,
+//            $this ->sortAsc,
             $this ->sortDesc,
+            $this ->sortByStageAsc,
+            $this ->sortByStageDesc,
             $this ->mapper,
         ]);
     }

@@ -15,7 +15,7 @@ class EventMapper
         return true;
     }
 
-    public function process(array $events, array $params): array
+    public function process(array $events, array $params, \DateTimeImmutable $now): array
     {
         return array_map(function (Event $event) {
             $competition = $event->getCompetition();

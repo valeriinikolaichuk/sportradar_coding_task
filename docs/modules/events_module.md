@@ -6,18 +6,18 @@
             ↓create()
        EventPipeline -----------------> [EventPipelineInterface steps]
             |                
-            |--> EventProvider <------- EventRepository
+            |--> DefaultEventFilter <------- EventRepository
             |
-            |--> DefaultEventFilter
+          ? |--> SortDescScenario 
             |
-          ? |- SortAscScenario
+          ? |--> SortByStageAsc
             |
-          ? |- SortDescScenario
+          ? |--> SortByStageDesc
             |
-            |- EventMapper ----> EventDTO
-            |                       |- TeamDTO
-            |                       |- ResultDTO
-            |                       |- StageDTO
+            |--> EventMapper ----> EventDTO
+            |                         |- TeamDTO
+            |                         |- ResultDTO
+            |                         |- StageDTO
             ↓
     events/_table.html.twig
             ↓

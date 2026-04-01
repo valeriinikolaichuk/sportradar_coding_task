@@ -16,7 +16,29 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findAllEvents(): array
+    public function findPast(\DateTimeImmutable $now, int $limit): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.matchDate < :now')
+            ->setParameter('now', $now)
+            ->orderBy('e.matchDate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFuture(\DateTimeImmutable $now, int $limit): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.matchDate >= :now')
+            ->setParameter('now', $now)
+            ->orderBy('e.matchDate', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+/*    public function findAllEvents(): array
     {
         return $this->createQueryBuilder('e')
             ->leftJoin('e.homeTeam', 'ht')
@@ -30,6 +52,7 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+*/
 
     public function findOneEventWithRelations(int $id): ?Event
     {

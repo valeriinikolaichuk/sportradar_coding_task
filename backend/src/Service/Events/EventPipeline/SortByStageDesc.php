@@ -2,17 +2,17 @@
 
 namespace App\Service\Events\EventPipeline;
 
-class SortDescScenario implements EventPipelineInterface
+class SortByStageDesc implements EventPipelineInterface
 {
     public function supports(array $params): bool
     {
-        return ($params['sort'] ?? null) === 'desc';
+        return ($params['sort'] ?? null) === 'stage_down';
     }
 
     public function process(array $events, array $params, \DateTimeImmutable $now): array
     {
         usort($events, fn($a, $b) =>
-            $b->getDateTime() <=> $a->getDateTime()
+            $b->getStage()->getOrdering() <=> $a->getStage()->getOrdering()
         );
 
         return $events;

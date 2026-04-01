@@ -6,11 +6,20 @@ export default class extends Controller {
     }
 
     sortAsc() {
-        this.load({ sort: "asc" });
+//        this.load({ sort: "asc" });
+        this.load();
     }
 
     sortDesc() {
         this.load({ sort: "desc" });
+    }
+
+    stageUp() {
+        this.load({ sort: "stage_up" });
+    }
+
+    stageDown() {
+        this.load({ sort: "stage_down" });
     }
 
     load(params) {
