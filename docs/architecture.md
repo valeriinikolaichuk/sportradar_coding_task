@@ -38,10 +38,7 @@ This document describes the **backend architecture** of the project
 |EventPipelineFactory|Assembles ordered pipeline steps and returns configured EventPipeline instance|
 |EventPipeline|Executes all processing steps sequentially using `supports()` and `process()`|
 |EventPipelineInterface|Defines a contract for all **pipeline** steps. Ensures consistent structure for processing event data|
-|EventProvider|Fetches events from database via `EventRepository`|
-|DefaultEventFilter|Splits events into past and future, applies limits|
-|SortAscScenario|Sorts events by datetime ascending|
-|SortDescScenario|Sorts events by datetime descending|
+|DefaultEventFilter|Fetches events from database via `EventRepository`. Splits events into past and future, applies limits|
 |EventMapper	|Transforms `Event` entities into DTO objects for presentation|
 |EventDTO	|Main data structure for UI (date, time, teams, result, competition, etc.)|
 |TeamDTO	|Represents team-related data (name, slug, country code, etc.)|
