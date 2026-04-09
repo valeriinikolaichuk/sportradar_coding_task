@@ -2,7 +2,7 @@
 
 ### ER Diagram
 
-![ER Diagram](symfony_new(1).svg)
+![ER Diagram](symfony_new1.svg)
 
 ---
 
