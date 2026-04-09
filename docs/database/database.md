@@ -2,7 +2,7 @@
 
 ### ER Diagram
 
-![ER Diagram](symfony_new.svg)
+![ER Diagram](symfony_new(1).svg)
 
 ---
 
@@ -48,17 +48,10 @@ These tables represent the primary business entities of the system and are used 
 
 ### 2. Mapping / Integration Tables
 
-### - external_api
-- Stores external identifiers from different APIs
-- Does not store full API responses, only key identification data
-- No direct relations with core tables
-- Supports API validation and mapping logic
-
-### - allowed_external_id
-- Stores allowed external identifiers
-- Used to validate incoming API data
-- No direct relations with core tables
-- Ensures only trusted IDs are processed
+### - external_api_mapping
+- Stores configuration used to map external API fields to the internal domain model
+- Defines how data from different API providers should be transformed and normalized
+- Allowing the system to support multiple external sources without hardcoding field mappings in the application code
   
 ---
 
