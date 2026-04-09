@@ -20,9 +20,6 @@ class Competition
     #[ORM\Column(length: 150)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $season = null;
-
     #[ORM\ManyToOne(inversedBy: 'competitions')]
     #[ORM\JoinColumn(name: "_sport_id", nullable: false)]
     private ?Sports $sport = null;
@@ -54,17 +51,6 @@ class Competition
     public function setName(string $name): static
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getSeason(): ?string
-    {
-        return $this->season;
-    }
-
-    public function setSeason(string $season): static
-    {
-        $this->season = $season;
         return $this;
     }
 

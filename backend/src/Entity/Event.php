@@ -80,6 +80,21 @@ class Event
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $scoreByPeriods = null;
 
+    #[ORM\Column(length: 20)]
+    private ?string $season = null;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private \DateTimeImmutable $updatedAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -297,5 +312,38 @@ class Event
         return new \DateTimeImmutable(
             $date ->format('Y-m-d') . ' ' . $timeString
         );
+    }
+
+    public function getSeason(): ?string
+    {
+        return $this->season;
+    }
+
+    public function setSeason(string $season): static
+    {
+        $this->season = $season;
+        return $this;
+    }
+
+        public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 }
