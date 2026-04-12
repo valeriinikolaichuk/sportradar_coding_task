@@ -21,7 +21,7 @@ class AddEventService
         $this -> em = $em;
     }
 
-    public function createEvent(CreateEventDTO $dto): ?EventDTO
+    public function createEvent(CreateEventDTO $dto): void
     {
         $homeTeam = $this ->em ->getRepository(Team::class)->find($dto -> homeTeamId);
         $awayTeam = $this ->em ->getRepository(Team::class)->find($dto -> awayTeamId);
