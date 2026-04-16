@@ -16,6 +16,105 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function findPast(
+        \DateTimeImmutable $now,
+        int $limit,
+        ?string $sport = null,
+        ?string $competition = null,
+        ?\DateTimeImmutable $dateFrom = null,
+        ?\DateTimeImmutable $dateTo = null
+    ): array {
+        $qb = $this->createQueryBuilder('e')
+            ->select('DISTINCT e')
+            ->leftJoin('e.homeTeam', 'ht')
+            ->leftJoin('e.awayTeam', 'at')
+            ->leftJoin('e.stage', 's')
+            ->leftJoin('e.competition', 'c')
+            ->leftJoin('e.winnerTeam', 'wt')
+            ->leftJoin('e.stadium', 'st')
+            ->leftJoin('e.groupTable', 'g')
+            ->leftJoin('e.sport', 'sp')
+            ->addSelect('ht', 'at', 's', 'c', 'wt', 'st', 'g', 'sp')
+            ->where('e.matchDate < :now')
+            ->setParameter('now', $now);
+
+        if ($sport) {
+            $qb->andWhere('sp.slug = :sport')
+            ->setParameter('sport', $sport);
+        }
+
+        if ($competition) {
+            $qb->andWhere('c.slug = :competition')
+            ->setParameter('competition', $competition);
+        }
+
+        if ($dateFrom) {
+            $qb->andWhere('e.matchDate >= :dateFrom')
+            ->setParameter('dateFrom', $dateFrom);
+        }
+
+        if ($dateTo) {
+            $qb->andWhere('e.matchDate <= :dateTo')
+            ->setParameter('dateTo', $dateTo);
+        }
+
+        return $qb
+            ->orderBy('e.matchDate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFuture(
+        \DateTimeImmutable $now,
+        int $limit,
+        ?string $sport = null,
+        ?string $competition = null,
+        ?\DateTimeImmutable $dateFrom = null,
+        ?\DateTimeImmutable $dateTo = null
+    ): array {
+        $qb = $this->createQueryBuilder('e')
+            ->select('DISTINCT e')
+            ->leftJoin('e.homeTeam', 'ht')
+            ->leftJoin('e.awayTeam', 'at')
+            ->leftJoin('e.stage', 's')
+            ->leftJoin('e.competition', 'c')
+            ->leftJoin('e.winnerTeam', 'wt')
+            ->leftJoin('e.stadium', 'st')
+            ->leftJoin('e.groupTable', 'g')
+            ->leftJoin('e.sport', 'sp')
+            ->addSelect('ht', 'at', 's', 'c', 'wt', 'st', 'g', 'sp')
+            ->where('e.matchDate >= :now')
+            ->setParameter('now', $now);
+
+        if ($sport) {
+            $qb->andWhere('sp.slug = :sport')
+            ->setParameter('sport', $sport);
+        }
+
+        if ($competition) {
+            $qb->andWhere('c.slug = :competition')
+            ->setParameter('competition', $competition);
+        }
+
+        if ($dateFrom) {
+            $qb->andWhere('e.matchDate >= :dateFrom')
+            ->setParameter('dateFrom', $dateFrom);
+        }
+
+        if ($dateTo) {
+            $qb->andWhere('e.matchDate <= :dateTo')
+            ->setParameter('dateTo', $dateTo);
+        }
+
+        return $qb
+            ->orderBy('e.matchDate', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /*
     public function findPast(\DateTimeImmutable $now, int $limit): array
     {
         return $this->createQueryBuilder('e')
@@ -37,6 +136,8 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    */
 
 /*    public function findAllEvents(): array
     {
